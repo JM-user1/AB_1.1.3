@@ -3,6 +3,7 @@ package jm.task.core.jdbc;
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
+import jm.task.core.jdbc.util.Util;
 
 import java.sql.SQLException;
 
@@ -18,16 +19,17 @@ public class Main {
         UserService userService = new UserServiceImpl();
 
         userService.createUsersTable();
+        userService.saveUser("Ви", "Просто Ви", (byte) 20);
+        userService.saveUser("Джонни", "Сильверхенд", (byte) 27);
+        userService.saveUser("Джуди", "Альварес", (byte) 20);
+        userService.saveUser("Керри", "Евродин", (byte) 28);
 
-        userService.saveUser("Наташа", "Ростова", (byte) 16);
-        userService.saveUser("Андрей", "Болконский", (byte) 27);
-        userService.saveUser("Жюли", "Курагина", (byte) 20);
-        userService.saveUser("Пьер", "Безухов", (byte) 20);
-
-        System.out.println(userService.getAllUsers());
-
+        for (User user : userService.getAllUsers()){
+            System.out.println(user.toString());
+        }
         userService.cleanUsersTable();
-
         userService.dropUsersTable();
+        Util.closeSessionFactory();
+        System.out.println("Утка");
     }
 }

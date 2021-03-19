@@ -38,11 +38,13 @@ public class UserServiceTest {
     public void saveUser() {
         try {
             userService.dropUsersTable();
+            System.out.println("ok");
             userService.createUsersTable();
+            System.out.println("ok1");
             userService.saveUser(testName, testLastName, testAge);
-
+            System.out.println("ok2");
             User user = userService.getAllUsers().get(0);
-
+            System.out.println("ok3");
             if (!testName.equals(user.getName())
                     || !testLastName.equals(user.getLastName())
                     || testAge != user.getAge()
